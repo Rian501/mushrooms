@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Mushroom Mania</title>
+	<meta charset="utf-8">
+</head>
+<body ng-app="shroomApp">
+	<h1>Can You Eat It?</h1>
+	<div>
+		<input type="text" ng-model="searchTerm">
+	</div>
+	<div>
+		<input type="radio" id="poisonous" name="edible" value="false" ng-model="edible">
+		<label for="poisonous">Poisonous</label>
+		<input type="radio" id="nonpoisonous" name="edible" value="true" ng-model="edible">
+		<label for="nonpoisonous">Safe to eat</label>
+	</div>
+
+	<div class="display" ng-controller="MushroomController">
+		<p>You are searching for: {{searchTerm}}</p>
+		<ul>
+			<li ng-repeat="mushroom in shroomsArray | filter: searchTerm | filter: edible">
+				<h3>{{mushroom.name}}</h3>
+				<p>Description: {{mushroom.description}}</p>
+				<h5>Safe to eat? <span ng-if="mushroom.edible"> Yes.</span><span ng-if="!mushroom.edible"> No.</span></h5>
+
+			</li>
+		</ul>
+	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+	<script type="text/javascript" src="app.js"></script>
+	<script type="text/javascript" src="mushroomController.js"></script>
+</body>
+</html>
